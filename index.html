@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Guía práctica para aprender a crear una página web con Inteligencia Artificial. Paso a paso, prompts, herramientas y ejemplos listos." />
+  <meta name="author" content="CreaTuWebConIA" />
+  <title>Crea tu página web con IA — Guía práctica</title>
+
+  <!-- AD SENSE: pega aquí tu script de AdSense (opcional). Ejemplo:
+  <script data-ad-client="ca-pub-XXXXXXXXXXXX" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  -->
+
+  <style>
+    /* Reset simple */
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: radial-gradient(1200px 600px at 10% 10%, rgba(99,102,241,0.08), transparent),
+                  radial-gradient(800px 500px at 90% 90%, rgba(236,72,153,0.06), transparent),
+                  #0b0f17;
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.6;
+    }
+
+    /* Container */
+    .container{max-width:1100px;margin:0 auto;padding:28px 20px}
+
+    /* Header / nav */
+    header{position:sticky;top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.00));backdrop-filter:blur(6px);border-radius:12px;padding:12px;border:1px solid rgba(255,255,255,0.03);box-shadow:0 6px 18px rgba(2,6,23,0.6)}
+    .brand{display:flex;align-items:center;gap:12px}
+    .logo{
+      width:52px;height:52px;border-radius:10px;
+      background:linear-gradient(135deg,#8b5cf6,#ec4899);
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;box-shadow:0 6px 18px rgba(139,92,246,0.16)
+    }
+    nav{display:flex;gap:14px;align-items:center;margin-left:auto}
+    nav a{color:#bcd1ff;text-decoration:none;padding:8px 12px;border-radius:8px;font-size:14px}
+    nav a:hover{background:rgba(255,255,255,0.02);color:#ffffff}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;align-items:center;padding:42px 0}
+    .title{font-size:32px;font-weight:800;line-height:1.05}
+    .title .accent{background:linear-gradient(90deg,#8b5cf6,#ec4899);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .lead{color:#b8c7ff;max-width:68ch;margin-top:12px}
+
+    .cta-row{display:flex;gap:12px;margin-top:18px;flex-wrap:wrap}
+    .btn{display:inline-block;padding:12px 18px;border-radius:10px;font-weight:600;text-decoration:none}
+    .btn-primary{background:linear-gradient(90deg,#6366f1,#ec4899);color:white;box-shadow:0 8px 30px rgba(99,102,241,0.12)}
+    .btn-outline{border:1px solid rgba(255,255,255,0.06);color:#d6e0ff;background:transparent}
+
+    /* Card grid */
+    .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border:1px solid rgba(255,255,255,0.03);padding:16px;border-radius:12px}
+    .muted{color:#9fb0ff;font-size:13px}
+
+    /* Sections */
+    section{padding:48px 0;border-bottom:1px solid rgba(255,255,255,0.02)}
+    h2{font-size:22px;margin-bottom:10px}
+    p{margin-top:8px;color:#cbd9ff}
+
+    /* Prompt generator box */
+    .prompt-box{background:linear-gradient(90deg, rgba(99,102,241,0.06), rgba(236,72,153,0.04));padding:16px;border-radius:12px;border:1px solid rgba(255,255,255,0.03)}
+    input,textarea{width:100%;padding:10px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.06);color:inherit}
+    textarea{min-height:84px;resize:vertical}
+
+    /* Examples and code block */
+    pre{background:#081025;padding:12px;border-radius:10px;color:#bcd1ff;overflow:auto;font-size:13px}
+    code{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, 'Roboto Mono', 'Courier New', monospace}
+
+    /* Footer */
+    footer{padding:28px 0;color:#9fb0ff;font-size:14px;text-align:center}
+
+    /* Responsive */
+    @media(min-width:900px){
+      .hero{grid-template-columns:1fr 420px}
+      .title{font-size:40px}
+    }
+
+    /* subtle animations */
+    .fade-up{transform:translateY(14px);opacity:0;animation:fadeUp .7s ease forwards}
+    @keyframes fadeUp{to{transform:none;opacity:1}}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header class="fade-up" style="display:flex;gap:18px;align-items:center">
+      <div class="brand">
+        <div class="logo">IA</div>
+        <div>
+          <div style="font-weight:700;font-size:16px">Crea tu Web con IA</div>
+          <div class="muted" style="font-size:12px">Guía práctica — Aprende paso a paso</div>
+        </div>
+      </div>
+
+      <nav aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a>
+        <a href="#pasos">Pasos</a>
+        <a href="#herramientas">Herramientas</a>
+        <a href="#ejemplos">Ejemplos</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacto" class="btn btn-primary" style="padding:8px 12px;font-size:13px">Comenzar</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <section id="inicio" class="hero">
+      <div class="fade-up">
+        <div class="title">Aprende a <span class="accent">crear páginas web</span> con Inteligencia Artificial</div>
+        <p class="lead">Esta guía te enseña, paso a paso, cómo conceptualizar, generar contenido, diseñar y publicar un sitio web usando herramientas de IA —sin necesidad de programar— con resultados profesionales y prácticos para proyectos reales.</p>
+
+        <div class="cta-row">
+          <a href="#pasos" class="btn btn-primary">Ver los pasos</a>
+          <a href="#herramientas" class="btn btn-outline">Ver herramientas</a>
+        </div>
+
+        <div class="grid-3" style="margin-top:18px">
+          <div class="card">
+            <div style="font-weight:700">Tiempo</div>
+            <div class="muted" style="margin-top:6px">1–3 horas para una landing básica; una web completa puede tomar más al crear contenido propio.</div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700">Sin código</div>
+            <div class="muted" style="margin-top:6px">Usa IA + editores visuales para generar plantillas, luego publica en GitHub Pages, Netlify o Vercel.</div>
+          </div>
+          <div class="card">
+            <div style="font-weight:700">SEO inicial</div>
+            <div class="muted" style="margin-top:6px">La guía incluye metadescripciones y headings optimizados para buscadores.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prompt generator -->
+      <aside class="fade-up" style="align-self:start">
+        <div class="prompt-box">
+          <div style="font-weight:700;margin-bottom:8px">Generador de prompt</div>
+          <div class="muted" style="margin-bottom:10px">Escribe el nombre de tu proyecto y una descripción breve. Obtendrás un prompt listo para pegar en ChatGPT u otra IA.</div>
+
+          <label class="muted">Nombre del proyecto</label>
+          <input id="projectName" placeholder="Ej: Pastelería Doña Ana" />
+
+          <label class="muted" style="margin-top:8px;display:block">Descripción breve</label>
+          <textarea id="projectDesc" placeholder="Ej: Vendo cupcakes artesanales en Quito, pedidos y catering"></textarea>
+
+          <button id="genBtn" class="btn btn-primary" style="width:100%;margin-top:10px">Generar prompt</button>
+
+          <div style="margin-top:10px">
+            <div class="muted" style="font-size:13px">Prompt generado</div>
+            <pre id="promptOut" style="min-height:56px">Aquí aparecerá el prompt.</pre>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- PASOS -->
+    <section id="pasos">
+      <h2>Pasos detallados para crear tu web con IA</h2>
+      <p>Cada paso incluye acciones concretas, ejemplos y prompts que puedes usar tal cual en tu asistente de IA favorito.</p>
+
+      <div style="margin-top:18px;display:grid;gap:12px">
+        <div class="card">
+          <strong>1. Define la idea y el objetivo</strong>
+          <p class="muted" style="margin-top:6px">Clarifica qué ofreces, quién es tu público y cuál es la acción que quieres: comprar, suscribirse o solicitar información. Esta claridad guiará todo el contenido y el diseño.</p>
+          <div style="margin-top:8px"><em>Prompt ejemplo:</em></div>
+          <pre><code>Describe en 3 párrafos la propuesta de valor para una pastelería local: público objetivo, 3 beneficios principales y un titular convincente.</code></pre>
+        </div>
+
+        <div class="card">
+          <strong>2. Genera contenido con IA</strong>
+          <p class="muted" style="margin-top:6px">Pide H1, subtítulo, sección "Cómo funciona", testimonios de ejemplo y metadescripciones. Edita los resultados para que suenen auténticos.</p>
+          <pre><code>Genera un H1, un subtítulo y 5 bullets de beneficios para una landing de cupcakes.</code></pre>
+        </div>
+
+        <div class="card">
+          <strong>3. Diseña rápidamente</strong>
+          <p class="muted" style="margin-top:6px">Usa herramientas que transforman texto en maquetas (por ejemplo Framer AI o editores visuales). Mantén paletas de 2 colores + 1 acento y tipografías legibles.</p>
+        </div>
+
+        <div class="card">
+          <strong>4. Publica y optimiza</strong>
+          <p class="muted" style="margin-top:6px">Sube a GitHub Pages / Netlify / Vercel, configura un dominio y añade analytics. Genera metadescripciones y estructura para SEO.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERRAMIENTAS -->
+    <section id="herramientas">
+      <h2>Herramientas recomendadas</h2>
+      <p>Herramientas útiles para cada fase: contenido, diseño, hosting y recursos multimedia.</p>
+
+      <div class="grid-3" style="margin-top:12px">
+        <div class="card">
+          <strong>ChatGPT</strong>
+          <div class="muted" style="margin-top:6px">Generación de textos, prompts y metadatos. Útil para crear H1, descripciones y entradas de blog.</div>
+        </div>
+        <div class="card">
+          <strong>Framer AI / Builders</strong>
+          <div class="muted" style="margin-top:6px">Convierte texto en maquetas visuales. Exporta HTML/CSS o ajusta la interfaz en el editor visual.</div>
+        </div>
+        <div class="card">
+          <strong>Vercel / Netlify</strong>
+          <div class="muted" style="margin-top:6px">Deploy fácil y rápido con integración a repositorios. Ideal para publicar prototipos y sitios estáticos.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EJEMPLOS -->
+    <section id="ejemplos">
+      <h2>Ejemplos prácticos y prompts listos</h2>
+      <p>Copiar y pegar: prompts probados que devuelven estructuras completas.</p>
+
+      <div style="display:grid;gap:12px;margin-top:12px">
+        <div class="card">
+          <strong>Landing para negocio local</strong>
+          <pre><code>Prompt: Genera una landing para una pastelería local llamada \"Doña Ana\". Público: familias y regalos. Incluye hero con oferta, sección de productos, testimonios, precios y contacto.</code></pre>
+        </div>
+
+        <div class="card">
+          <strong>Portfolio personal</strong>
+          <pre><code>Prompt: Crea un portfolio para un diseñador UX con 3 proyectos destacados, proceso de trabajo, testimonios y formulario de contacto.</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2>Preguntas frecuentes</h2>
+
+      <div style="display:grid;gap:10px;margin-top:12px">
+        <details class="card">
+          <summary style="font-weight:700">¿Necesito saber programar?</summary>
+          <p class="muted" style="margin-top:6px">No. Con las herramientas actuales puedes generar sitios profesionales sin escribir código. Sin embargo, conocer HTML/CSS ayuda para personalizar y solucionar detalles.</p>
+        </details>
+
+        <details class="card">
+          <summary style="font-weight:700">¿Puedo monetizar la web creada con IA?</summary>
+          <p class="muted" style="margin-top:6px">Sí; asegúrate de respetar licencias de imágenes y derechos de autor. Crea contenido propio o usa bancos de imágenes libres.</p>
+        </details>
+
+        <details class="card">
+          <summary style="font-weight:700">¿Dónde coloco los anuncios?</summary>
+          <p class="muted" style="margin-top:6px">Coloca anuncios en secciones con tráfico y evita ubicaciones intrusivas. Sigue las políticas de Google AdSense sobre colocación y contenido.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section id="contacto">
+      <h2>Contacto / Obtener prompts personalizados</h2>
+      <p>Si quieres prompts personalizados o una guía en PDF, escribe tu idea y recibirás un prompt optimizado.</p>
+
+      <div style="display:grid;grid-template-columns:1fr;gap:12px;margin-top:12px">
+        <input id="contactName" placeholder="Nombre o proyecto" />
+        <input id="contactEmail" placeholder="Tu email (opcional)" />
+        <textarea id="contactMsg" placeholder="Describe brevemente tu idea"></textarea>
+        <button id="contactSend" class="btn btn-primary" style="width:220px">Generar prompt personalizado</button>
+
+        <div class="muted" style="margin-top:6px">Nota: este formulario no envía correos en esta versión local. Si subes la web, conecta un servicio (Formspree, Netlify Forms o backend propio).</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div style="margin-bottom:12px">© <strong>CreaTuWebConIA</strong> — Guía práctica. Hecho con IA y cariño.</div>
+      <div class="muted">Consejo: sube este archivo a GitHub Pages o Netlify para obtener HTTPS y envío de formularios. Coloca tu código de AdSense en &lt;head&gt; y sigue las políticas de Google.</div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts: prompt generator y comportamientos simples -->
+  <script>
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const target = document.querySelector(a.getAttribute('href'));
+        if(target){ e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); }
+      });
+    });
+
+    // Prompt generator
+    document.getElementById('genBtn').addEventListener('click', ()=>{
+      const name = document.getElementById('projectName').value.trim() || 'Mi proyecto';
+      const desc = document.getElementById('projectDesc').value.trim() || 'Descripción breve del negocio';
+      const prompt = `Eres un asistente que crea sitios web. Genera una estructura completa para un sitio oscuro y moderno para "${name}". Objetivo: enseñar a crear páginas con IA. Incluir: hero con titular y subtítulo, 5 secciones (introducción, pasos detallados, herramientas, ejemplos prácticos, FAQ), CTA claras, metadescripciones y un footer. Descripción del proyecto: ${desc}. Devuélvelo en formato listo para copiar.`;
+      document.getElementById('promptOut').textContent = prompt;
+      navigator.clipboard && navigator.clipboard.writeText(prompt).catch(()=>{/* no obligatorio */});
+      alert('Prompt copiado al portapapeles (si tu navegador lo permite).');
+    });
+
+    // "Enviar" contacto -> solo genera prompt
+    document.getElementById('contactSend').addEventListener('click', ()=>{
+      const name = document.getElementById('contactName').value.trim() || 'Proyecto';
+      const msg = document.getElementById('contactMsg').value.trim() || 'Descripción';
+      const prompt = `Genera un prompt para crear una landing educativa para "${name}". Descripción: ${msg}. Incluye H1, subtítulo, 4 secciones y CTA.`;
+      alert('Prompt personalizado generado y copiado (si el navegador lo permite).\\n\\n' + prompt);
+      try{ navigator.clipboard.writeText(prompt); }catch(e){}
+    });
+  </script>
+</body>
+</html>
